@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}login{% endblock title %}
+
+{% block content %}
+  <div class="container w-50 text-bg-success">
+    <form method="post" action="{% url "login" %}">
+        {% csrf_token %}
+        {% for fm  in form  %}
+        {{fm.label_tag }}{{fm}}
+        {% endfor %}
+        <input type="submit" value="login" class="btn btn-primary justify-content-center">
+    </form>
+  </div>
+
+  <div class="justify-content-center">
+    <li><ul>{% if messages %}
+      {%for msg in messages %}
+      <p class="alert alert-success">{{msg}}</p>
+      {% endfor %}
+      {% endif %}</ul></li>
+ </div >
+{% endblock content %}
+

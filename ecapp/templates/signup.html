@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}
+Signup
+{% endblock title %}
+
+
+
+{%block content%}
+<div class="justify-content-center">
+   {% if messages %}
+   {%for msg in messages %}
+   <p class="alert alert-success">{{msg}}</p>
+   {% endfor %}
+   {% endif %}
+</div >
+
+<div class="m-lg-5 justify-content-center container">
+   <form method="post">
+      {% csrf_token %}
+      {% for fm in form %}
+      <div class="row mb-4 justify-content-center">
+         <label for="{{ fm.id_for_label }}" class="col-sm-2 col-form-label text-black text-bg-warning">{{ fm.label }}</label>
+         <div class="col-sm-6">
+            {{ fm }}
+         </div>
+      </div>
+      {% endfor %}
+     
+      <button type="submit" class="btn btn-primary" value="Sign up">Submit</button>
+    </form>
+</div>
+{% if form.errors %}
+<div class="text-bg-danger form-control w-50">
+   <ul>
+      {% for field, errors in form.errors.items %}
+      {% for error in errors %}
+      <li>{{ field }}: {{ error }}</li>
+      {% endfor %}
+      {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+{% endblock  %}
